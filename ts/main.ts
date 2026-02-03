@@ -48,14 +48,12 @@ function showBoard() {
 }
 
 function resetBoard() {
-    [...board.children].forEach((child) => {
-        child.className = "dol";
-    })
     // 돌 없애기
-    let blacks = document.getElementsByClassName("black");
-    let whites = document.getElementsByClassName("white");
-    [...blacks, ...whites].forEach((e) => {
-        e.remove();
+    let dols = document.getElementsByClassName("dol");
+    [...dols].forEach((e) => {
+        e.classList.remove("black");
+        e.classList.remove("white");
+        e.classList.remove("selected");
     })
 }
 
