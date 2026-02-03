@@ -1,6 +1,9 @@
 .container {
     width: 90vmin;
+    height: 90vmin;
     margin: auto;
+    display: flex;
+    border: solid black 5px;
 }
 
 .board {
@@ -21,11 +24,12 @@
     cursor: pointer;
     border-radius: 50%;
     margin: auto;
+    z-index: 1;
 }
 
-/* .hidden {
+.hidden {
     background: gray !important;
-} */
+}
 
 .hover {
     box-shadow: 0 0 0 2px gray inset;
@@ -80,4 +84,24 @@
 
 .game-over {
     pointer-events: none;
+}
+
+.line-horizontal {
+    margin-top: calc(3vmin - 1px);
+    width: inherit;
+    height: 0px;
+    border: solid 1px black;
+    background: black;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.line-vertical {
+    margin-left: calc(3vmin - 1px);
+    width: 0px;
+    height: inherit;
+    border: solid 1px black;
+    background: black;
+    position: absolute;
+    box-sizing: border-box;
 }

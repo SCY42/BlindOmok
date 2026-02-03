@@ -1,7 +1,7 @@
 let isWhiteTurn = true;
 let isGameOver = false;
+const container = document.getElementsByClassName("container")[0];
 const board = document.getElementsByClassName("board")[0];
-const div = document.createElement("div");
 const showTurn = document.getElementsByClassName("show-turn")[0];
 const endButton = document.getElementsByClassName("end-button")[0];
 function doOmok(dol) {
@@ -68,10 +68,22 @@ function endGame(button) {
         resetBoard();
     }
 }
-div.classList.add("dol");
+const dol = document.createElement("div");
+dol.classList.add("dol");
 for (let i = 0; i < 225; i++) {
-    div.id = i.toString();
-    board.append(div.cloneNode(true));
+    dol.id = i.toString();
+    board.append(dol.cloneNode(true));
+}
+const line = document.createElement("div");
+for (let i = 0; i < 15; i++) {
+    line.className = "line-horizontal";
+    line.style.marginTop = `calc(3vmin + ${6 * i}vmin - 1px)`;
+    line.style.marginLeft = "0px";
+    container.append(line.cloneNode(true));
+    line.className = "line-vertical";
+    line.style.marginTop = "0px";
+    line.style.marginLeft = `calc(3vmin + ${6 * i}vmin - 1px)`;
+    container.append(line.cloneNode(true));
 }
 board.addEventListener("click", (e) => {
     if (e.target == null || !(e.target instanceof Element)) {
