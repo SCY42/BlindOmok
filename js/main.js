@@ -1,6 +1,5 @@
 let isWhiteTurn = true;
 let isGameOver = false;
-const container = document.getElementsByClassName("container")[0];
 const board = document.getElementsByClassName("board")[0];
 const showTurn = document.getElementsByClassName("show-turn")[0];
 const endButton = document.getElementsByClassName("end-button")[0];
@@ -77,13 +76,13 @@ for (let i = 0; i < 225; i++) {
 const line = document.createElement("div");
 for (let i = 0; i < 15; i++) {
     line.className = "line-horizontal";
-    line.style.marginTop = `calc(3vmin + ${6 * i}vmin - 1px)`;
+    line.style.marginTop = `calc(2.5vmin + ${5 * i}vmin - 1px)`;
     line.style.marginLeft = "0px";
-    container.append(line.cloneNode(true));
+    board.append(line.cloneNode(true));
     line.className = "line-vertical";
     line.style.marginTop = "0px";
-    line.style.marginLeft = `calc(3vmin + ${6 * i}vmin - 1px)`;
-    container.append(line.cloneNode(true));
+    line.style.marginLeft = `calc(2.5vmin + ${5 * i}vmin - 1px)`;
+    board.append(line.cloneNode(true));
 }
 board.addEventListener("click", (e) => {
     if (e.target == null || !(e.target instanceof Element)) {
