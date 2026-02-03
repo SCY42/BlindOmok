@@ -23,9 +23,9 @@
     margin: auto;
 }
 
-.hidden {
+/* .hidden {
     background: gray !important;
-}
+} */
 
 .hover {
     box-shadow: 0 0 0 2px gray inset;
@@ -76,4 +76,8 @@
     /* aspect-ratio: 1; */
     background: white;
     /* border-radius: 50%; */
+}
+
+.game-over {
+    pointer-events: none;
 }

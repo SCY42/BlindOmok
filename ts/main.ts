@@ -1,13 +1,16 @@
 let isWhiteTurn = true;
 let isGameOver = false;
 
-const board = document.getElementsByClassName("board")[0]
-const div = document.createElement("div")
-const showTurn = document.getElementsByClassName("show-turn")[0]
-const endButton = document.getElementsByClassName("end-button")[0]
+const board = document.getElementsByClassName("board")[0];
+const div = document.createElement("div");
+const showTurn = document.getElementsByClassName("show-turn")[0];
+const endButton = document.getElementsByClassName("end-button")[0];
 
+// ╔════════════════════════════════════════════════════════════════════════╗ //
+// ║                          function definitions                          ║ //
+// ╚════════════════════════════════════════════════════════════════════════╝ //
 
-function doOmok(dol) {
+function doOmok(dol: Element) {
     if (isWhiteTurn) {
         dol.classList.add("white");
     } else {
@@ -45,7 +48,7 @@ function showBoard() {
 }
 
 function resetBoard() {
-    Object.values(board.children).forEach((child) => {
+    [...board.children].forEach((child) => {
         child.className = "dol";
     })
     // 돌 없애기
@@ -56,14 +59,18 @@ function resetBoard() {
     })
 }
 
-function endGame(button) {
+function endGame(button: Element) {
     if (!isGameOver) {      // 게임을 끝내기 위해 버튼을 누름
         isGameOver = true;
-        showBoard();
+        console.log("GAME OVER!")
         button.textContent = "재시작";
+        board.classList.add("game-over");
+        showBoard();
     } else {                // 판을 리셋하기 위해 버튼을 누름
         isGameOver = false;
+        console.log("GAME RESTARTED!")
         button.textContent = "게임 종료";
+        board.classList.remove("game-over");
         resetBoard();
     }
 }
@@ -75,7 +82,7 @@ function endGame(button) {
 div.classList.add("dol")
 
 for (let i = 0; i < 225; i++) {
-    div.id = i;
+    div.id = i.toString();
     board.append(div.cloneNode(true));
 }
 
@@ -84,28 +91,40 @@ for (let i = 0; i < 225; i++) {
 // ╚════════════════════════════════════════════════════════════════════════╝ //
 
 board.addEventListener("click", (e) => {
+    if (e.target == null || !(e.target instanceof Element)) { alert("Something's Wrong!"); return; }
+    
     if (e.target.classList.contains("dol")) {
         doOmok(e.target);   // 돌 놓기
+        isOmok(+e.target.id);
         changeTurn();       // 턴 넘기기
         e.target.classList.add("selected"); // 놓은 칸 표시
         e.preventDefault();
     }
 })
 
+// 마우스 호버 시 하이라이트
 board.addEventListener("mouseover", (e) => {
+    if (e.target == null || !(e.target instanceof Element)) { alert("Something's Wrong!"); return; }
+    
     if (e.target.classList.contains("dol")) {
         e.target.classList.add("hover");
         e.preventDefault();
     }
 })
 
+// 마우스 호버 종료 시 하이라이트 제거
 board.addEventListener("mouseout", (e) => {
+    if (e.target == null || !(e.target instanceof Element)) { alert("Something's Wrong!"); return; }
+    
     if (e.target.classList.contains("dol") && e.target.classList.contains("hover")) {
         e.target.classList.remove("hover");
         e.preventDefault();
     }
 })
 
+// 게임 종료 버튼
 endButton.addEventListener("click", (e) => {
+    if (e.target == null || !(e.target instanceof Element)) { alert("Something's Wrong!"); return; }
+    
     endGame(e.target);
 })
